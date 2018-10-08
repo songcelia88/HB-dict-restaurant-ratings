@@ -49,6 +49,7 @@ def add_new_rating():
 	ratings[new_restaurant_name] = new_rating
 	print("Added {} with a score of {}".format(new_restaurant_name, ratings[new_restaurant_name]))
 
+
 def update_rating(restaurant = ""):
 
 	#if no restaurante is specified, choose a random restaurant to update
@@ -66,16 +67,25 @@ set_ratings(sys.argv[1])
 user_choice = 0
 while True:
 	try:
-		user_choice = int(input("\nWhat do you want to do? \n 1. View Ratings \n 2. Add a new restaurant \n 3. Quit \n (please enter a number 1-3.) \n\n"))
+		user_choice = int(input("\nWhat do you want to do? \n 1. View Ratings \n 2. Add a new restaurant \n 3. Update a restaurant rating \n 4. Quit \n (please enter a number 1-4.) \n\n"))
 		
 		
 		if user_choice == 1:
 			get_ratings()
 		
-		elif  user_choice==2:
+		elif user_choice==2:
 			add_new_rating()
 		
-		elif user_choice ==3:
+		elif user_choice == 3:
+			restaurant = input("Choose a restaurant to update: ").title()
+			if ratings.get(restaurant) or restaurant == "":
+				update_rating(restaurant)
+			else:
+				print("That restaurant doesn't exist. lets add it!")
+				add_new_rating()
+
+
+		elif user_choice ==4:
 			print ("BYE!")
 			break
 		
@@ -85,6 +95,6 @@ while True:
 	
 
 	except ValueError:
-		print("\nINVALID ENTRY: Please enter a 1. 2. or 3.")
+		print("\nINVALID ENTRY: Please enter a 1, 2, 3 or 4")
 
 
